@@ -30,12 +30,13 @@
 #include "ux_host_stack.h"
 
 
+#if !defined(UX_HOST_STANDALONE)
 /**************************************************************************/ 
 /*                                                                        */ 
 /*  FUNCTION                                               RELEASE        */ 
 /*                                                                        */ 
 /*    _ux_host_class_cdc_ecm_write                        PORTABLE C      */ 
-/*                                                           6.1          */
+/*                                                           6.1.11       */
 /*  AUTHOR                                                                */
 /*                                                                        */
 /*    Chaoqiong Xiao, Microsoft Corporation                               */
@@ -57,7 +58,7 @@
 /*  CALLS                                                                 */ 
 /*                                                                        */ 
 /*    _ux_host_stack_transfer_request       Process transfer request      */ 
-/*    _ux_utility_semaphore_put             Release protection semaphore  */ 
+/*    _ux_host_semaphore_put                Release protection semaphore  */ 
 /*    nx_packet_transmit_release            Release NetX packet           */
 /*                                                                        */ 
 /*  CALLED BY                                                             */ 
@@ -74,6 +75,12 @@
 /*                                            TX symbols instead of using */
 /*                                            them directly,              */
 /*                                            resulting in version 6.1    */
+/*  01-31-2022     Chaoqiong Xiao           Modified comment(s),          */
+/*                                            refined macros names,       */
+/*                                            resulting in version 6.1.10 */
+/*  04-25-2022     Chaoqiong Xiao           Modified comment(s),          */
+/*                                            fixed standalone compile,   */
+/*                                            resulting in version 6.1.11 */
 /*                                                                        */
 /**************************************************************************/
 UINT  _ux_host_class_cdc_ecm_write(VOID *cdc_ecm_class, NX_PACKET *packet)
@@ -214,8 +221,9 @@ UX_HOST_CLASS_CDC_ECM   *cdc_ecm;
     /* Signal that we are done arming and resume waiting thread if necessary.  */
     cdc_ecm -> ux_host_class_cdc_ecm_bulk_out_transfer_check_and_arm_in_process =  UX_FALSE;
     if (cdc_ecm -> ux_host_class_cdc_ecm_bulk_out_transfer_waiting_for_check_and_arm_to_finish == UX_TRUE)
-        _ux_utility_semaphore_put(&cdc_ecm -> ux_host_class_cdc_ecm_bulk_out_transfer_waiting_for_check_and_arm_to_finish_semaphore);
+        _ux_host_semaphore_put(&cdc_ecm -> ux_host_class_cdc_ecm_bulk_out_transfer_waiting_for_check_and_arm_to_finish_semaphore);
 
     /* We are done here.  */
     return(status);            
 }
+#endif

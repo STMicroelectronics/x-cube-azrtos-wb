@@ -32,7 +32,7 @@ extern "C" {
 /* USER CODE END ET */
 
 /* Exported constants --------------------------------------------------------*/
-#define FX_SRAM_DISK_BASE_ADDRESS         SRAM2A_BASE
+#define FX_SRAM_DISK_BASE_ADDRESS         0x20010000
 #define FX_SRAM_DISK_SIZE                 16 * 1024
 
 /* USER CODE BEGIN EC */

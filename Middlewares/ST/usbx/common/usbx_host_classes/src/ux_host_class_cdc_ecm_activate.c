@@ -31,12 +31,13 @@
 
 UX_HOST_CLASS_CDC_ECM_NX_ETHERNET_POOL_ALLOCSIZE_ASSERT
 
+#if !defined(UX_HOST_STANDALONE)
 /**************************************************************************/ 
 /*                                                                        */ 
 /*  FUNCTION                                               RELEASE        */ 
 /*                                                                        */ 
 /*    _ux_host_class_cdc_ecm_activate                     PORTABLE C      */ 
-/*                                                           6.1.4        */
+/*                                                           6.1.12       */
 /*  AUTHOR                                                                */
 /*                                                                        */
 /*    Chaoqiong Xiao, Microsoft Corporation                               */
@@ -62,8 +63,8 @@ UX_HOST_CLASS_CDC_ECM_NX_ETHERNET_POOL_ALLOCSIZE_ASSERT
 /*    _ux_host_stack_class_instance_destroy    Destroy the class instance */ 
 /*    _ux_utility_memory_allocate              Allocate memory block      */ 
 /*    _ux_utility_memory_free                  Free memory block          */ 
-/*    _ux_utility_semaphore_create             Create semaphore           */
-/*    _ux_utility_semaphore_delete             Delete semaphore           */
+/*    _ux_host_semaphore_create                Create semaphore           */
+/*    _ux_host_semaphore_delete                Delete semaphore           */
 /*    _ux_utility_thread_create                Create thread              */
 /*    _ux_utility_thread_delete                Delete thread              */
 /*    _ux_utility_thread_resume                Resume thread              */
@@ -89,12 +90,22 @@ UX_HOST_CLASS_CDC_ECM_NX_ETHERNET_POOL_ALLOCSIZE_ASSERT
 /*                                            compile option for using    */
 /*                                            packet pool from NetX,      */
 /*                                            resulting in version 6.1.4  */
+/*  01-31-2022     Chaoqiong Xiao           Modified comment(s),          */
+/*                                            refined macros names,       */
+/*                                            resulting in version 6.1.10 */
+/*  04-25-2022     Chaoqiong Xiao           Modified comment(s),          */
+/*                                            fixed standalone compile,   */
+/*                                            resulting in version 6.1.11 */
+/*  07-29-2022     Chaoqiong Xiao           Modified comment(s),          */
+/*                                            fixed parameter/variable    */
+/*                                            names conflict C++ keyword, */
+/*                                            resulting in version 6.1.12 */
 /*                                                                        */
 /**************************************************************************/
 UINT  _ux_host_class_cdc_ecm_activate(UX_HOST_CLASS_COMMAND *command)
 {
 
-UX_INTERFACE                        *interface;
+UX_INTERFACE                        *interface_ptr;
 UX_HOST_CLASS_CDC_ECM               *cdc_ecm;
 UINT                                status;
 UX_TRANSFER                         *transfer_request;
@@ -105,10 +116,10 @@ UX_INTERFACE                        *cur_interface;
 
     /* The CDC ECM class is always activated by the interface descriptor and not the
        device descriptor.  */
-    interface =  (UX_INTERFACE *) command -> ux_host_class_command_container;
+    interface_ptr =  (UX_INTERFACE *) command -> ux_host_class_command_container;
 
     /* Is this the control interface?  */
-    if (interface -> ux_interface_descriptor.bInterfaceClass == UX_HOST_CLASS_CDC_CONTROL_CLASS)
+    if (interface_ptr -> ux_interface_descriptor.bInterfaceClass == UX_HOST_CLASS_CDC_CONTROL_CLASS)
     {
 
         /* We ignore the control interface. All activation is performed when
@@ -125,23 +136,23 @@ UX_INTERFACE                        *cur_interface;
     cdc_ecm -> ux_host_class_cdc_ecm_class =  command -> ux_host_class_command_class_ptr;
 
     /* Store the device container into the cdc_ecm class instance.  */
-    cdc_ecm -> ux_host_class_cdc_ecm_device =  interface -> ux_interface_configuration -> ux_configuration_device;
+    cdc_ecm -> ux_host_class_cdc_ecm_device =  interface_ptr -> ux_interface_configuration -> ux_configuration_device;
 
     /* Store the interface container into the cdc_acm class instance.  */
-    cdc_ecm -> ux_host_class_cdc_ecm_interface_data =  interface;
+    cdc_ecm -> ux_host_class_cdc_ecm_interface_data =  interface_ptr;
 
     /* We need to link the data and control interfaces together. In order
        to do this, we first need to find the control interface. Per the spec, 
        it should be behind this one.  */
 
     /* Set the current interface to the second interface. */
-    cur_interface =  interface -> ux_interface_configuration -> ux_configuration_first_interface;
+    cur_interface =  interface_ptr -> ux_interface_configuration -> ux_configuration_first_interface;
 
     /* Initialize to null. */
     control_interface =  UX_NULL;
 
     /* Loop through all the interfaces until we find the current data interface.  */
-    while (cur_interface != interface)
+    while (cur_interface != interface_ptr)
     {
 
         /* Is this a control interface?  */
@@ -214,19 +225,19 @@ UX_INTERFACE                        *cur_interface;
     {
 
         /* Create the semaphore for aborting bulk in transfers.  */
-        status =  _ux_utility_semaphore_create(&cdc_ecm -> ux_host_class_cdc_ecm_bulk_in_transfer_waiting_for_check_and_arm_to_finish_semaphore, 
+        status =  _ux_host_semaphore_create(&cdc_ecm -> ux_host_class_cdc_ecm_bulk_in_transfer_waiting_for_check_and_arm_to_finish_semaphore, 
                                                "host CDC-ECM bulk in wait semaphore", 0);
         if (status == UX_SUCCESS)
         {
 
             /* Create the semaphore for aborting bulk out transfers.  */
-            status =  _ux_utility_semaphore_create(&cdc_ecm -> ux_host_class_cdc_ecm_bulk_out_transfer_waiting_for_check_and_arm_to_finish_semaphore, 
+            status =  _ux_host_semaphore_create(&cdc_ecm -> ux_host_class_cdc_ecm_bulk_out_transfer_waiting_for_check_and_arm_to_finish_semaphore, 
                                                    "host CDC-ECM bulk out wait semaphore", 0);
             if (status == UX_SUCCESS)
             {
 
                 /* Create the semaphore to wake up the CDC ECM thread.  */
-                status =  _ux_utility_semaphore_create(&cdc_ecm -> ux_host_class_cdc_ecm_interrupt_notification_semaphore, "host CDC-ECM interrupt notification semaphore", 0);
+                status =  _ux_host_semaphore_create(&cdc_ecm -> ux_host_class_cdc_ecm_interrupt_notification_semaphore, "host CDC-ECM interrupt notification semaphore", 0);
                 if (status == UX_SUCCESS)
                 {
 #ifndef UX_HOST_CLASS_CDC_ECM_USE_PACKET_POOL_FROM_NETX
@@ -282,7 +293,7 @@ UX_INTERFACE                        *cur_interface;
                                 cdc_ecm -> ux_host_class_cdc_ecm_state =  UX_HOST_CLASS_INSTANCE_LIVE;
 
                                 /* This instance of the device must also be stored in the interface container.  */
-                                interface -> ux_interface_class_instance =  (VOID *) cdc_ecm;
+                                interface_ptr -> ux_interface_class_instance =  (VOID *) cdc_ecm;
 
                                 /* Create this class instance.  */
                                 _ux_host_stack_class_instance_create(cdc_ecm -> ux_host_class_cdc_ecm_class, (VOID *) cdc_ecm);
@@ -332,7 +343,7 @@ UX_INTERFACE                        *cur_interface;
                                 _ux_host_stack_class_instance_destroy(cdc_ecm -> ux_host_class_cdc_ecm_class, (VOID *) cdc_ecm);
 
                                 /* Unmount instance.  */
-                                interface -> ux_interface_class_instance =  UX_NULL;
+                                interface_ptr -> ux_interface_class_instance =  UX_NULL;
                             }
 
                             /* Delete CDC-ECM thread.  */
@@ -350,15 +361,15 @@ UX_INTERFACE                        *cur_interface;
                     }
 #endif
                     /* Delete interrupt notification semaphore.  */
-                    _ux_utility_semaphore_delete(&cdc_ecm -> ux_host_class_cdc_ecm_interrupt_notification_semaphore);
+                    _ux_host_semaphore_delete(&cdc_ecm -> ux_host_class_cdc_ecm_interrupt_notification_semaphore);
                 }
 
                 /* Delete class-level bulk out semaphore.  */
-                _ux_utility_semaphore_delete(&cdc_ecm -> ux_host_class_cdc_ecm_bulk_out_transfer_waiting_for_check_and_arm_to_finish_semaphore);
+                _ux_host_semaphore_delete(&cdc_ecm -> ux_host_class_cdc_ecm_bulk_out_transfer_waiting_for_check_and_arm_to_finish_semaphore);
             }
 
             /* Delete class-level bulk in semaphore.  */
-            _ux_utility_semaphore_delete(&cdc_ecm -> ux_host_class_cdc_ecm_bulk_in_transfer_waiting_for_check_and_arm_to_finish_semaphore);
+            _ux_host_semaphore_delete(&cdc_ecm -> ux_host_class_cdc_ecm_bulk_in_transfer_waiting_for_check_and_arm_to_finish_semaphore);
         }
     }
 
@@ -379,4 +390,4 @@ UX_INTERFACE                        *cur_interface;
     /* Return completion status.  */
     return(status);    
 }
-
+#endif

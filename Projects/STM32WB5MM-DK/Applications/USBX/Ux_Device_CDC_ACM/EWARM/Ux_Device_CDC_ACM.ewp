@@ -1075,7 +1075,7 @@
           <name>$PROJ_DIR$/../Core/Src/main.c</name>
         </file>
         <file>
-          <name>$PROJ_DIR$/../Core/Src/tx_initialize_low_level.s</name>
+          <name>$PROJ_DIR$/../Core/Src/tx_initialize_low_level.S</name>
         </file>
         <file>
           <name>$PROJ_DIR$/../Core/Src/app_threadx.c</name>
@@ -1137,6 +1137,9 @@
       <name>STM32WBxx_HAL_Driver</name>
       <file>
         <name>$PROJ_DIR$/../../../../../../Drivers/STM32WBxx_HAL_Driver/Src/stm32wbxx_hal_rcc.c</name>
+      </file>
+      <file>
+        <name>$PROJ_DIR$/../../../../../../Drivers/STM32WBxx_HAL_Driver/Src/stm32wbxx_ll_rcc.c</name>
       </file>
       <file>
         <name>$PROJ_DIR$/../../../../../../Drivers/STM32WBxx_HAL_Driver/Src/stm32wbxx_hal_rcc_ex.c</name>
@@ -1490,6 +1493,9 @@
         </file>
         <file>
           <name>$PROJ_DIR$/../../../../../../Middlewares/ST/usbx/common/usbx_stm32_device_controllers/ux_dcd_stm32_interrupt_handler.c</name>
+        </file>
+        <file>
+          <name>$PROJ_DIR$/../../../../../../Middlewares/ST/usbx/common/usbx_stm32_device_controllers/ux_dcd_stm32_transfer_abort.c</name>
         </file>
         <file>
           <name>$PROJ_DIR$/../../../../../../Middlewares/ST/usbx/common/usbx_stm32_device_controllers/ux_dcd_stm32_transfer_request.c</name>

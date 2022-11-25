@@ -6,7 +6,7 @@
   ******************************************************************************
   * @attention
   *
-  * Copyright (c) 2021 STMicroelectronics.
+  * Copyright (c) 2022 STMicroelectronics.
   * All rights reserved.
   *
   * This software is licensed under terms that can be found in the LICENSE file
@@ -214,4 +214,3 @@ void TIM1_TRG_COM_TIM17_IRQHandler(void)
   BSP_PWM_LED_IRQHandler();
 }
 /* USER CODE END 1 */
-

@@ -10,7 +10,7 @@
       <TargetName>Fx_NoR_Write_Read_File</TargetName>
       <ToolsetNumber>0x4</ToolsetNumber>
       <ToolsetName>ARM-ADS</ToolsetName>
-      <pCCUsed>6140001::V6.14.1::ARMCLANG</pCCUsed>
+      <pCCUsed>6180000::V6.18::ARMCLANG</pCCUsed>
       <uAC6>1</uAC6>
       <TargetOption>
         <TargetCommonOption>
@@ -186,10 +186,11 @@
             <RvdsVP>2</RvdsVP>
             <RvdsMve>0</RvdsMve>
             <RvdsCdeCp>0</RvdsCdeCp>
+            <nBranchProt>0</nBranchProt>
             <hadIRAM2>0</hadIRAM2>
             <hadIROM2>0</hadIROM2>
             <StupSel>8</StupSel>
-            <useUlib>1</useUlib>
+            <useUlib>0</useUlib>
             <EndSel>0</EndSel>
             <uLtcg>0</uLtcg>
             <nSecure>0</nSecure>
@@ -206,7 +207,7 @@
             <Ro2Chk>0</Ro2Chk>
             <Ro3Chk>0</Ro3Chk>
             <Ir1Chk>1</Ir1Chk>
-            <Ir2Chk>0</Ir2Chk>
+            <Ir2Chk>1</Ir2Chk>
             <Ra1Chk>0</Ra1Chk>
             <Ra2Chk>0</Ra2Chk>
             <Ra3Chk>0</Ra3Chk>
@@ -339,7 +340,7 @@
               <MiscControls></MiscControls>
               <Define>TX_INCLUDE_USER_DEFINE_FILE,FX_INCLUDE_USER_DEFINE_FILE,LX_INCLUDE_USER_DEFINE_FILE,USE_HAL_DRIVER,STM32WB5Mxx</Define>
               <Undefine></Undefine>
-              <IncludePath>../Core/Inc;  ../AZURE_RTOS/App;  ../FileX/App;  ../LevelX/App;  ../FileX/Target;  ../LevelX/Target;  ../../../../../../Drivers/STM32WBxx_HAL_Driver/Inc;  ../../../../../../Drivers/STM32WBxx_HAL_Driver/Inc/Legacy;  ../../../../../../Drivers/CMSIS/Device/ST/STM32WBxx/Include;  ../../../../../../Drivers/CMSIS/Include;  ../../../../../../Middlewares/ST/filex/common/inc/;  ../../../../../../Middlewares/ST/filex/ports/generic/inc/;  ../../../../../../Drivers/BSP/Components/s25fl128s/;  ../../../../../../Middlewares/ST/levelx/common/inc/;  ../../../../../../Middlewares/ST/threadx/common/inc/;  ../../../../../../Middlewares/ST/threadx/ports/cortex_m4/ac6/inc/;  ../../../../../../Drivers/BSP/STM32WB5MM-DK</IncludePath>
+              <IncludePath>../Core/Inc;../AZURE_RTOS/App;../FileX/App;../LevelX/App;../FileX/Target;../LevelX/Target;../../../../../../Drivers/STM32WBxx_HAL_Driver/Inc;../../../../../../Drivers/STM32WBxx_HAL_Driver/Inc/Legacy;../../../../../../Drivers/CMSIS/Device/ST/STM32WBxx/Include;../../../../../../Drivers/CMSIS/Include;../../../../../../Middlewares/ST/filex/common/inc/;../../../../../../Middlewares/ST/filex/ports/generic/inc/;../../../../../../Drivers/BSP/Components/s25fl128s/;../../../../../../Middlewares/ST/levelx/common/inc/;../../../../../../Middlewares/ST/threadx/common/inc/;../../../../../../Middlewares/ST/threadx/ports/cortex_m4/ac6/inc/;../../../../../../Drivers/BSP/STM32WB5MM-DK</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -361,7 +362,7 @@
             </VariousControls>
           </Aads>
           <LDads>
-            <umfTarg>1</umfTarg>
+            <umfTarg>0</umfTarg>
             <Ropi>0</Ropi>
             <Rwpi>0</Rwpi>
             <noStLib>0</noStLib>
@@ -403,44 +404,6 @@
               <FileName>tx_initialize_low_level.S</FileName>
               <FileType>2</FileType>
               <FilePath>../Core/Src/tx_initialize_low_level.S</FilePath>
-              <FileOption>
-                <CommonProperty>
-                  <UseCPPCompiler>2</UseCPPCompiler>
-                  <RVCTCodeConst>0</RVCTCodeConst>
-                  <RVCTZI>0</RVCTZI>
-                  <RVCTOtherData>0</RVCTOtherData>
-                  <ModuleSelection>0</ModuleSelection>
-                  <IncludeInBuild>1</IncludeInBuild>
-                  <AlwaysBuild>2</AlwaysBuild>
-                  <GenerateAssemblyFile>2</GenerateAssemblyFile>
-                  <AssembleAssemblyFile>2</AssembleAssemblyFile>
-                  <PublicsOnly>2</PublicsOnly>
-                  <StopOnExitCode>11</StopOnExitCode>
-                  <CustomArgument></CustomArgument>
-                  <IncludeLibraryModules></IncludeLibraryModules>
-                  <ComprImg>1</ComprImg>
-                </CommonProperty>
-                <FileArmAds>
-                  <Aads>
-                    <interw>2</interw>
-                    <Ropi>2</Ropi>
-                    <Rwpi>2</Rwpi>
-                    <thumb>2</thumb>
-                    <SplitLS>2</SplitLS>
-                    <SwStkChk>2</SwStkChk>
-                    <NoWarn>2</NoWarn>
-                    <uSurpInc>2</uSurpInc>
-                    <useXO>2</useXO>
-                    <ClangAsOpt>1</ClangAsOpt>
-                    <VariousControls>
-                      <MiscControls></MiscControls>
-                      <Define></Define>
-                      <Undefine></Undefine>
-                      <IncludePath></IncludePath>
-                    </VariousControls>
-                  </Aads>
-                </FileArmAds>
-              </FileOption>
             </File>
             <File>
               <FileName>app_threadx.c</FileName>
@@ -526,6 +489,11 @@
               <FileName>stm32wbxx_hal_rcc.c</FileName>
               <FileType>1</FileType>
               <FilePath>../../../../../../Drivers/STM32WBxx_HAL_Driver/Src/stm32wbxx_hal_rcc.c</FilePath>
+            </File>
+            <File>
+              <FileName>stm32wbxx_ll_rcc.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>../../../../../../Drivers/STM32WBxx_HAL_Driver/Src/stm32wbxx_ll_rcc.c</FilePath>
             </File>
             <File>
               <FileName>stm32wbxx_hal_rcc_ex.c</FileName>
@@ -1916,6 +1884,16 @@
               <FileName>tx_thread_interrupt_control.S</FileName>
               <FileType>2</FileType>
               <FilePath>../../../../../../Middlewares/ST/threadx/ports/cortex_m4/ac6/src/tx_thread_interrupt_control.S</FilePath>
+            </File>
+            <File>
+              <FileName>tx_thread_interrupt_disable.S</FileName>
+              <FileType>2</FileType>
+              <FilePath>../../../../../../Middlewares/ST/threadx/ports/cortex_m4/ac6/src/tx_thread_interrupt_disable.S</FilePath>
+            </File>
+            <File>
+              <FileName>tx_thread_interrupt_restore.S</FileName>
+              <FileType>2</FileType>
+              <FilePath>../../../../../../Middlewares/ST/threadx/ports/cortex_m4/ac6/src/tx_thread_interrupt_restore.S</FilePath>
             </File>
             <File>
               <FileName>tx_thread_schedule.S</FileName>

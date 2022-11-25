@@ -1,17 +1,17 @@
-﻿| Component                       | License                                               | Copyright |
+﻿| Component                       | Copyright                                             | License |
 |:---------                       |:-------                                               |:----------|
-| Cortex-M CMSIS                  | Apache License 2.0                                    | ARM Limited|
-| STM32WBxx CMSIS                 | Apache License 2.0                                    | ARM Limited - STMicroelectronics |
-| STM32WBxx HAL                   | BSD-3-Clause                                          | STMicroelectronics |
-| BSP P-NUCLEO-WB55.Nucleo        | BSD-3-Clause                                          | STMicroelectronics |
-| BSP NUCLEO-WB15CC               | BSD-3-Clause                                          | STMicroelectronics |
-| BSP P-NUCLEO-WB55.USBDongle     | BSD-3-Clause                                          | STMicroelectronics |
-| BSP STM32WB5MM-DK               | BSD-3-Clause                                          | STMicroelectronics |
-| BSP Components                  | BSD-3-Clause                                          | STMicroelectronics |
-| Application Projects            | Proprietary                                           | STMicroelectronics |
-| CMSIS RTOS Threadx wrapper      | Proprietary                                           | STMicroelectronics |
-| Azure RTOS ThreadX              | Microsoft Software License for Azure RTOS             | Microsoft Corporation|
-| Azure RTOS NetXDuo              | Microsoft Software License for Azure RTOS             | Microsoft Corporation|
-| Azure RTOS FileX                | Microsoft Software License for Azure RTOS             | Microsoft Corporation|
-| Azure RTOS LeveLX               | Microsoft Software License for Azure RTOS             | Microsoft Corporation|
-| Azure RTOS USBX                 | Microsoft Software License for Azure RTOS             | Microsoft Corporation|
+| Cortex-M CMSIS                  | ARM Limited                                           | Apache License 2.0 |
+| STM32WBxx CMSIS                 | ARM Limited - STMicroelectronics                      | Apache License 2.0 |
+| STM32WBxx HAL                   | STMicroelectronics                                    | BSD-3-Clause  |
+| BSP P-NUCLEO-WB55.Nucleo        | STMicroelectronics                                    | BSD-3-Clause  |
+| BSP NUCLEO-WB15CC               | STMicroelectronics                                    | BSD-3-Clause  |
+| BSP P-NUCLEO-WB55.USBDongle     | STMicroelectronics                                    | BSD-3-Clause  |
+| BSP STM32WB5MM-DK               | STMicroelectronics                                    | BSD-3-Clause  |
+| BSP Components                  | STMicroelectronics                                    | BSD-3-Clause  |
+| Application Projects            | STMicroelectronics                                    | Proprietary |
+| CMSIS RTOS Threadx wrapper      | STMicroelectronics                                    | Proprietary |
+| Azure RTOS ThreadX              | Microsoft Corporation                                 | Microsoft Software License for Azure RTOS |
+| Azure RTOS NetXDuo              | Microsoft Corporation                                 | Microsoft Software License for Azure RTOS |
+| Azure RTOS FileX                | Microsoft Corporation                                 | Microsoft Software License for Azure RTOS |
+| Azure RTOS LeveLX               | Microsoft Corporation                                 | Microsoft Software License for Azure RTOS |
+| Azure RTOS USBX                 | Microsoft Corporation                                 | Microsoft Software License for Azure RTOS |

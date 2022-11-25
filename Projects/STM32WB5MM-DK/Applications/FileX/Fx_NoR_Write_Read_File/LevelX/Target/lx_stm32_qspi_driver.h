@@ -47,7 +47,7 @@ extern TX_SEMAPHORE qspi_rx_semaphore;
 /* when set to 1 LevelX is initializing the QuadSPI memory,
  * otherwise it is the up to the application to perform it.
  */
-#define LX_STM32_QSPI_INIT                               1
+#define LX_STM32_QSPI_INIT                               0
 
 /* allow the driver to fully erase the QuadSPI chip. This should be used carefully.
  * the call is blocking and takes a while. by default it is set to 0.

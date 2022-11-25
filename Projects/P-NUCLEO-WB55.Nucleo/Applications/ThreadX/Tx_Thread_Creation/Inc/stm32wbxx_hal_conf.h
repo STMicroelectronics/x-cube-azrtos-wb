@@ -154,7 +154,7 @@
 
 #if !defined  (LSE_STARTUP_TIMEOUT)
 #define LSE_STARTUP_TIMEOUT    5000U      /*!< Time out for LSE start up, in ms */
-#endif /* HSE_STARTUP_TIMEOUT */
+#endif /* LSE_STARTUP_TIMEOUT */
 
 /**
   * @brief External clock source for SAI1 peripheral
@@ -176,7 +176,7 @@
 #define  VDD_VALUE				3300U                   /*!< Value of VDD in mv */
 #define  TICK_INT_PRIORITY            15U      /*!< tick interrupt priority */
 #define  USE_RTOS                     0U
-#define  PREFETCH_ENABLE              1U
+#define  PREFETCH_ENABLE              0U
 #define  INSTRUCTION_CACHE_ENABLE     1U
 #define  DATA_CACHE_ENABLE            1U
 

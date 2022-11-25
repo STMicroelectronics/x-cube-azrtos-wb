@@ -14,7 +14,7 @@
 ;******************************************************************************
 ;* @attention
 ;*
-;* Copyright (c) 2019-2021 STMicroelectronics.
+;* Copyright (c) 2019-2022 STMicroelectronics.
 ;* All rights reserved.
 ;*
 ;* This software is licensed under terms that can be found in the LICENSE file
@@ -365,4 +365,3 @@ __user_initial_stackheap
 
                  END
 
-;************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE*****
