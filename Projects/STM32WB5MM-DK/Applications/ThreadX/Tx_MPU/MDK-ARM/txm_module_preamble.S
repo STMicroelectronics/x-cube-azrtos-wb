@@ -2,7 +2,7 @@
     .align 4
     .syntax unified
     .section Init
-
+    
     // Define public symbols
     .global __txm_module_preamble
 
@@ -12,8 +12,8 @@
     // Define common external references
     .global  _txm_module_thread_shell_entry
     .global  _txm_module_callback_request_thread_entry
-
-
+	
+    
     .eabi_attribute Tag_ABI_PCS_RO_data, 1
     .eabi_attribute Tag_ABI_PCS_R9_use,  1
     .eabi_attribute Tag_ABI_PCS_RW_data, 2

@@ -32,11 +32,6 @@
 	</natures>
 	<linkedResources>
 		<link>
-			<name>Doc/README.md</name>
-			<type>1</type>
-			<locationURI>PARENT-1-PROJECT_LOC/README.md</locationURI>
-		</link>
-		<link>
 			<name>Drivers/CMSIS/system_stm32wbxx.c</name>
 			<type>1</type>
 			<locationURI>PARENT-1-PROJECT_LOC/Core/Src/system_stm32wbxx.c</locationURI>
@@ -125,6 +120,11 @@
 			<name>Drivers/STM32WBxx_HAL_Driver/stm32wbxx_hal_uart_ex.c</name>
 			<type>1</type>
 			<locationURI>PARENT-6-PROJECT_LOC/Drivers/STM32WBxx_HAL_Driver/Src/stm32wbxx_hal_uart_ex.c</locationURI>
+		</link>
+		<link>
+			<name>Drivers/STM32WBxx_HAL_Driver/stm32wbxx_ll_rcc.c</name>
+			<type>1</type>
+			<locationURI>PARENT-6-PROJECT_LOC/Drivers/STM32WBxx_HAL_Driver/Src/stm32wbxx_ll_rcc.c</locationURI>
 		</link>
 		<link>
 			<name>Application/User/Core/main.c</name>

@@ -34,7 +34,7 @@ extern "C" {
 
 /* Private defines -----------------------------------------------------------*/
 
-#define UX_DCD_STM32_MAX_ED                                     8
+#define UX_DCD_STM32_MAX_ED                   8
 
 /* USER CODE BEGIN Private defines */
 

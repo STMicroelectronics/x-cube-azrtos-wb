@@ -51,13 +51,16 @@
     .global     _tx_initialize_unused_memory
     .global     _tx_timer_interrupt
     .global     __main
+
     .global     __tx_PendSVHandler
     .global     __tx_NMIHandler                     @ NMI
     .global     __tx_BadHandler                     @ HardFault
+
     .global     __tx_DBGHandler                     @ Monitor
     .global     __tx_PendSVHandler                  @ PendSV
     .global     __tx_SysTickHandler                 @ SysTick
     .global     __tx_IntHandler                     @ Int 0
+
 #ifdef USE_DYNAMIC_MEMORY_ALLOCATION
     .global     Image$$RW_IRAM1$$ZI$$Limit
 #endif
@@ -70,6 +73,7 @@ SYSTICK_CYCLES    =   ((SYSTEM_CLOCK / 100) -1)
     .text 32
     .align 4
     .syntax unified
+
 @/**************************************************************************/
 @/*                                                                        */
 @/*  FUNCTION                                               RELEASE        */
@@ -190,6 +194,8 @@ __tx_BadHandler:
     .thumb_func
 __tx_HardfaultHandler:
     B       __tx_HardfaultHandler
+
+
 
 @ /* Generic interrupt handler template */
     .global  __tx_IntHandler
@@ -449,10 +455,12 @@ SysTick_Handler:
     .global     __RAM_segment_used_end__
     .global     _tx_timer_interrupt
     .global     __main
+
     .global     __tx_PendSVHandler
     .global     _vectors
     .global     __tx_NMIHandler                     @ NMI
     .global     __tx_BadHandler                     @ HardFault
+
     .global     __tx_DBGHandler                     @ Monitor
     .global     __tx_PendSVHandler                  @ PendSV
     .global     __tx_SysTickHandler                 @ SysTick
@@ -590,6 +598,8 @@ __tx_BadHandler:
     .thumb_func
 __tx_HardfaultHandler:
     B       __tx_HardfaultHandler
+
+
 
 @ /* Generic interrupt handler template */
     .global  __tx_IntHandler

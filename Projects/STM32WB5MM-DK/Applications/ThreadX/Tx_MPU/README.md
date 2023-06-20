@@ -28,7 +28,7 @@ MainThread is expected to execute data read and write operations to/from user-de
 
 #### <b>Error behaviors</b>
 
-Green LED is turned off and Red LED will toggle every 300ms.
+Green LED is turned off and red LED will toggle every 300ms.
 
 #### <b>Assumptions if any</b>
 None

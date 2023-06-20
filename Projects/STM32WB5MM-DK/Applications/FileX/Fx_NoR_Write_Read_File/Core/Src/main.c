@@ -17,12 +17,11 @@
   */
 /* USER CODE END Header */
 /* Includes ------------------------------------------------------------------*/
-#include "main.h"
 #include "app_threadx.h"
+#include "main.h"
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
-
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -32,13 +31,6 @@
 
 /* Private define ------------------------------------------------------------*/
 /* USER CODE BEGIN PD */
-#if defined ( __GNUC__) && !defined(__clang__)
-/* With GCC, small printf (option LD Linker->Libraries->Small printf
-   set to 'Yes') calls __io_putchar() */
- #define PUTCHAR_PROTOTYPE int __io_putchar(int ch)
-#else
- #define PUTCHAR_PROTOTYPE int fputc(int ch, FILE *f)
-#endif
 /* USER CODE END PD */
 
 /* Private macro -------------------------------------------------------------*/
@@ -58,12 +50,21 @@ aPwmLedGsData_TypeDef aPwmLedGsData;
 
 /* Private function prototypes -----------------------------------------------*/
 void SystemClock_Config(void);
-static void MX_DMA_Init(void);
 static void MX_GPIO_Init(void);
+static void MX_DMA_Init(void);
 static void MX_QUADSPI_Init(void);
 static void MX_USART1_UART_Init(void);
 /* USER CODE BEGIN PFP */
-
+#if defined(__ICCARM__)
+/* New definition from EWARM V9, compatible with EWARM8 */
+int iar_fputc(int ch);
+#define PUTCHAR_PROTOTYPE int iar_fputc(int ch)
+#elif defined ( __CC_ARM ) || defined(__ARMCC_VERSION)
+/* ARM Compiler 5/6*/
+#define PUTCHAR_PROTOTYPE int fputc(int ch, FILE *f)
+#elif defined(__GNUC__)
+#define PUTCHAR_PROTOTYPE int __io_putchar(int ch)
+#endif /* __ICCARM__ */
 /* USER CODE END PFP */
 
 /* Private user code ---------------------------------------------------------*/
@@ -98,12 +99,11 @@ int main(void)
   /* USER CODE END SysInit */
 
   /* Initialize all configured peripherals */
-  MX_DMA_Init();
   MX_GPIO_Init();
+  MX_DMA_Init();
   MX_QUADSPI_Init();
   MX_USART1_UART_Init();
   /* USER CODE BEGIN 2 */
-  /* Configure the PWM LED */
   BSP_PWM_LED_Init();
   /* USER CODE END 2 */
 
@@ -276,29 +276,49 @@ static void MX_DMA_Init(void)
   */
 static void MX_GPIO_Init(void)
 {
+/* USER CODE BEGIN MX_GPIO_Init_1 */
+/* USER CODE END MX_GPIO_Init_1 */
 
   /* GPIO Ports Clock Enable */
   __HAL_RCC_GPIOB_CLK_ENABLE();
   __HAL_RCC_GPIOA_CLK_ENABLE();
   __HAL_RCC_GPIOD_CLK_ENABLE();
 
+/* USER CODE BEGIN MX_GPIO_Init_2 */
+/* USER CODE END MX_GPIO_Init_2 */
 }
 
 /* USER CODE BEGIN 4 */
+#if defined(__ICCARM__)
+size_t __write(int file, unsigned char const *ptr, size_t len)
+{
+ size_t idx;
+ unsigned char const *pdata = ptr;
+
+
+
+ for (idx = 0; idx < len; idx++)
+ {
+ iar_fputc((int)*pdata);
+ pdata++;
+ }
+ return len;
+}
+#endif /* __ICCARM__ */
+
+
 /**
-  * @brief  Retargets the C library printf function to the USART.
-  * @param  None
-  * @retval None
-  */
+* @brief  Retargets the C library printf function to the USART.
+* @param  None
+* @retval None
+*/
 PUTCHAR_PROTOTYPE
 {
-  /* Place your implementation of fputc here */
-  /* e.g. write a character to the USART and Loop until the end of transmission */
-  HAL_UART_Transmit(&huart1, (uint8_t *)&ch, 1, 0xFFFF);
-
-  return ch;
+/* Place your implementation of fputc here */
+/* e.g. write a character to the USART1 and Loop until the end of transmission */
+ HAL_UART_Transmit(&huart1, (uint8_t *)&ch, 1, 0xFFFF);
+ return ch;
 }
-
 /* USER CODE END 4 */
 
 /**
@@ -329,18 +349,15 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 void Error_Handler(void)
 {
   /* USER CODE BEGIN Error_Handler_Debug */
-  /* Forcing enabling interrupt during Threadx initialization*/
-  __enable_irq();
-
+  /* User can add his own implementation to report the HAL error return state */
   /* Turn OFF GREEN LED */
   aPwmLedGsData[PWM_LED_GREEN] = PWM_LED_GSDATA_OFF;
   /* Turn ON RED LED */
   aPwmLedGsData[PWM_LED_RED] = PWM_LED_GSDATA_7_0;
-
   while (1)
   {
     BSP_PWM_LED_Toggle(aPwmLedGsData);
-    HAL_Delay(300);
+    HAL_Delay(200);
   }
   /* USER CODE END Error_Handler_Debug */
 }
@@ -358,10 +375,6 @@ void assert_failed(uint8_t *file, uint32_t line)
   /* USER CODE BEGIN 6 */
   /* User can add his own implementation to report the file name and line number,
      ex: printf("Wrong parameters value: file %s on line %d\r\n", file, line) */
-  /* Infinite loop */
-  while (1)
-  {
-  }
   /* USER CODE END 6 */
 }
 #endif /* USE_FULL_ASSERT */

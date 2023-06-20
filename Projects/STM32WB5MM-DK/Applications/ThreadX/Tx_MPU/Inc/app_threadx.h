@@ -26,7 +26,7 @@ extern "C" {
 #endif
 
 /* Includes ------------------------------------------------------------------*/
-#include "tx_api.h"
+
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
@@ -58,7 +58,7 @@ void MX_AZURE_RTOS_Init(void);
 
 /* Private defines -----------------------------------------------------------*/
 /* USER CODE BEGIN PD */
-#define TX_APP_MEM_POOL_SIZE                               2*1024
+#define TX_APP_MEM_POOL_SIZE                               10*1024
 #define MODULE_MANAGER_THREAD_PRIO                         4
 #define MODULE_MANAGER_THREAD_PREEMPTION_THRESHOLD         MODULE_MANAGER_THREAD_PRIO
 /* USER CODE END PD */

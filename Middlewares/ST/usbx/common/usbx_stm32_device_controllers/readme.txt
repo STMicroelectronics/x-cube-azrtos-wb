@@ -8,6 +8,28 @@
   ******************************************************************************
   */
 
+### V1.3.2 / 24-March-2023 ###
+=================================
+Main changes
+-------------
+- Add check on HAL transfer abort APIs in _ux_dcd_stm32_transfer_abort function.
+
+Dependencies:
+-------------
+- Azure RTOS USBX V6.1.10 or higher
+- STM32Cube PCD HAL drivers
+
+### V1.3.1 / 23-December-2022 ###
+=================================
+Main changes
+-------------
+- Add "_ux_dcd_stm32_setup_isr_pending" function prototype in ux_dcd_stm32.h file
+
+Dependencies:
+-------------
+- Azure RTOS USBX V6.1.10 or higher
+- STM32Cube PCD HAL drivers
+
 ### V1.3.0 / 30-September-2022 ###
 =================================
 Main changes

@@ -20,14 +20,14 @@ Azure RTOS is a professional grade, highly reliable and market proven Middleware
  - STM32 **granted production license:** [_here_](https://github.com/azure-rtos/threadx/blob/master/LICENSED-HARDWARE.txt)
 
 ### Prerequisites
-- USBX, FileX and NetXDuo building require ThreadX as they are based on RTOS model.
+- NetXDuo building require ThreadX as they are based on RTOS model.
 - USBX Host MSC requires FileX Middleware usage
 - USBX Device ECM/RNDIS classes require NetXDuo usage
 
 One of the following toolchains:
 
-- IAR Embedded Workbench for ARM (EWARM) toolchain 8.50.9 + ST-LINKV3.
-- [STM32CubeIDE V1.11.0](https://www.st.com/en/development-tools/stm32cubeide.html)  + ST-LINKV3
+- IAR Embedded Workbench for ARM (EWARM) toolchain 9.20.1 + ST-LINKV3.
+- [STM32CubeIDE V1.12.0](https://www.st.com/en/development-tools/stm32cubeide.html)  + ST-LINKV3
 - RealView Microcontroller Development Kit (MDK-ARM) toolchain V5.37 + ST-LINKV3
 
 ## Supported Devices and Boards by applications
@@ -68,6 +68,8 @@ Details about the content of this release are available in the release note [her
 | Middleware   |  Applications                    |       Short Description      |
 |--------------|----------------------------------|------------------------------|
 |ThreadX       | Tx_Thread_Creation               | It demonstrates how to create and destroy multiple threads using Azure RTOS ThreadX APIs. In addition, it shows how to use preemption threshold between threads and change priorities on-fly. [readme](./Projects/P-NUCLEO-WB55.Nucleo/Applications/ThreadX/Tx_Thread_Creation/README.md) |
+|ThreadX | Tx_Thread_Sync                | It demonstrates how to synchronize between threads using binary semaphores or mutexes. [readme](./Projects/P-NUCLEO-WB55.Nucleo/Applications/ThreadX/Tx_Thread_Sync/README.md) |
+|ThreadX | Tx_Thread_MsgQueue            | It demonstrates how to exchange message between threads using Message Queue API and how to handle message from different queues using event queue chaining feature. [readme](./Projects/P-NUCLEO-WB55.Nucleo/Applications/ThreadX/Tx_Thread_MsgQueue/README.md) |
 |ThreadX       | Tx_LowPower                      | It demonstrates how to configure the LowPower feature of Azure RTOS ThreadX stack. In addition, it shows how to use ThreadX MACRO related to the LowPower feature. [readme](./Projects/P-NUCLEO-WB55.Nucleo/Applications/ThreadX/Tx_LowPower/README.md) |
 |ThreadX       | Tx_MPU                           | It demonstrates how to load, start and unload modules. In addition, it shows how ThreadX memory protection on modules using the Memory Protection Unit (MPU). [readme](./Projects/STM32WB5MM-DK/Applications/ThreadX/Tx_MPU/README.md) |
 |USBX          | Ux_Device_CDC_ACM                | It demonstrates how to develop USB Device communication Class "CDC_ACM" based application. The application is designed to emulate an USB-to-UART bridge following the Virtual COM Port (VCP) implementation, the code provides all required device descriptors framework and associated Class descriptor report to build a compliant USB CDC_ACM device. [readme](./Projects/STM32WB5MM-DK/Applications/USBX/Ux_Device_CDC_ACM/README.md). |

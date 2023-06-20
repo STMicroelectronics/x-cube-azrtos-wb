@@ -30,9 +30,13 @@ extern "C" {
 
 /* USER CODE END ET */
 
+extern QSPI_HandleTypeDef hqspi;
+
 /* The following semaphore is being to notify about RX/TX completion. It needs to be released in the transfer callbacks */
 extern TX_SEMAPHORE qspi_tx_semaphore;
 extern TX_SEMAPHORE qspi_rx_semaphore;
+
+#define qspi_handle        hqspi
 
 /* Exported constants --------------------------------------------------------*/
 
@@ -161,6 +165,11 @@ UINT lx_qspi_driver_system_error(UINT error_code);
 
 UINT lx_stm32_qspi_initialize(LX_NOR_FLASH *nor_flash);
 
+#if (LX_STM32_QSPI_INIT == 1)
+extern void MX_QUADSPI_Init(void);
+#define qspi_driver_init() MX_QUADSPI_Init()
+#endif
+
 /* USER CODE BEGIN EFP */
 
 /* USER CODE END EFP */
@@ -170,28 +179,21 @@ UINT lx_stm32_qspi_initialize(LX_NOR_FLASH *nor_flash);
 
 /* USER CODE END PD */
 
-#define LX_STM32_QSPI_SECTOR_SIZE                 S25FL128S_SECTOR_SIZE
-#define LX_STM32_QSPI_FLASH_SIZE                  S25FL128S_FLASH_SIZE
-#define LX_STM32_QSPI_STATUS_REG_READY            S25FL128S_FSR_READY
-#define LX_STM32_QSPI_DUMMY_CYCLES_READ_QUAD      S25FL128S_DUMMY_CYCLES_READ_QUAD
 #define LX_STM32_QSPI_PAGE_SIZE                   S25FL128S_PAGE_SIZE
+#define LX_STM32_QSPI_FLASH_SIZE                  S25FL128S_FLASH_SIZE
 #define LX_STM32_QSPI_BULK_ERASE_MAX_TIME         S25FL128S_BULK_ERASE_MAX_TIME
-#define LX_STM32_QSPI_SECTOR_ERASE_MAX_TIME       S25FL128S_SECTOR_ERASE_MAX_TIME
-#define LX_STM32_QSPI_VCR_NB_DUMMY                S25FL128S_VCR_NB_DUMMY
-#define LX_STM32_QSPI_SR_WREN                     S25FL128S_SR1_WREN
-#define LX_STM32_QSPI_SR_WIP                      S25FL128S_SR1_WIP
-
-#define LX_STM32_QSPI_QUAD_INOUT_FAST_READ_CMD    S25FL128S_QUAD_OUT_FAST_READ_CMD
-#define LX_STM32_QSPI_QUAD_IN_FAST_PROG_CMD       S25FL128S_QUAD_IN_FAST_PROG_CMD
-#define LX_STM32_QSPI_BULK_ERASE_CMD              S25FL128S_BULK_ERASE_ALTERNATE_CMD
-#define LX_STM32_QSPI_SECTOR_ERASE_CMD            S25FL128S_SUBSECTOR_ERASE_CMD_4K
 #define LX_STM32_QSPI_RESET_MEMORY_CMD            S25FL128S_SOFTWARE_RESET_CMD
 #define LX_STM32_QSPI_WRITE_ENABLE_CMD            S25FL128S_WRITE_ENABLE_CMD
 #define LX_STM32_QSPI_READ_STATUS_REG_CMD         S25FL128S_READ_STATUS_REG1_CMD
-
-/* USER CODE BEGIN SECTOR_SIZE */
-
-/* USER CODE END SECTOR_SIZE */
+#define LX_STM32_QSPI_SECTOR_ERASE_CMD            S25FL128S_SUBSECTOR_ERASE_CMD_4K
+#define LX_STM32_QSPI_SR_WIP                      S25FL128S_SR1_WIP
+#define LX_STM32_QSPI_QUAD_INOUT_FAST_READ_CMD    S25FL128S_QUAD_OUT_FAST_READ_CMD
+#define LX_STM32_QSPI_QUAD_IN_FAST_PROG_CMD       S25FL128S_QUAD_IN_FAST_PROG_CMD
+#define LX_STM32_QSPI_BULK_ERASE_CMD              S25FL128S_BULK_ERASE_ALTERNATE_CMD
+#define LX_STM32_QSPI_SECTOR_SIZE                 S25FL128S_SECTOR_SIZE
+#define LX_STM32_QSPI_SR_WREN                     S25FL128S_SR1_WREN
+#define LX_STM32_QSPI_SECTOR_ERASE_MAX_TIME       S25FL128S_SECTOR_ERASE_MAX_TIME
+#define LX_STM32_QSPI_DUMMY_CYCLES_READ_QUAD_STR  S25FL128S_DUMMY_CYCLES_READ_QUAD
 
 /* USER CODE BEGIN 1 */
 

@@ -17,8 +17,8 @@
   */
 /* USER CODE END Header */
 /* Includes ------------------------------------------------------------------*/
-#include "main.h"
 #include "app_threadx.h"
+#include "main.h"
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
@@ -32,6 +32,7 @@
 
 /* Private define ------------------------------------------------------------*/
 /* USER CODE BEGIN PD */
+
 /* USER CODE END PD */
 
 /* Private macro -------------------------------------------------------------*/
@@ -99,7 +100,6 @@ int main(void)
 
   /* Configure the PWM LED */
   BSP_PWM_LED_Init();
-
   /* USER CODE END 2 */
 
   MX_ThreadX_Init();
@@ -314,11 +314,15 @@ static void MX_DMA_Init(void)
   */
 static void MX_GPIO_Init(void)
 {
+/* USER CODE BEGIN MX_GPIO_Init_1 */
+/* USER CODE END MX_GPIO_Init_1 */
 
   /* GPIO Ports Clock Enable */
   __HAL_RCC_GPIOB_CLK_ENABLE();
   __HAL_RCC_GPIOA_CLK_ENABLE();
 
+/* USER CODE BEGIN MX_GPIO_Init_2 */
+/* USER CODE END MX_GPIO_Init_2 */
 }
 
 /* USER CODE BEGIN 4 */
@@ -354,18 +358,13 @@ void Error_Handler(void)
 {
   /* USER CODE BEGIN Error_Handler_Debug */
   /* User can add his own implementation to report the HAL error return state */
-
-  /* Forsing enabling interrupt during Threadx initialization*/
-  __enable_irq();
-
+  __disable_irq();
   /* Configure LED RED duty cycle */
   aPwmLedGsData[PWM_LED_RED] = PWM_LED_GSDATA_7_0;
   aPwmLedGsData[PWM_LED_GREEN] = PWM_LED_GSDATA_OFF;
   aPwmLedGsData[PWM_LED_BLUE] = PWM_LED_GSDATA_OFF;
-
   while (1)
   {
-
     /* Toggle RED LED to indicate status */
     BSP_PWM_LED_Toggle(aPwmLedGsData);
 
@@ -387,9 +386,6 @@ void assert_failed(uint8_t *file, uint32_t line)
   /* USER CODE BEGIN 6 */
   /* User can add his own implementation to report the file name and line number,
      ex: printf("Wrong parameters value: file %s on line %d\r\n", file, line) */
-  while (1)
-  {
-  }
   /* USER CODE END 6 */
 }
 #endif /* USE_FULL_ASSERT */

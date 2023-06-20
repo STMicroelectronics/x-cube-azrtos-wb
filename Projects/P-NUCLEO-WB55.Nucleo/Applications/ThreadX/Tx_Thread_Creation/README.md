@@ -28,12 +28,16 @@ After repeating the sequence above 3 times, the <b>MainThread</b> should destroy
 #### <b>Error behaviors</b>
 
 LED_RED toggles every 1 second if any error occurs.
+an error message is printed to the serial port.
 
 #### <b>Assumptions if any</b>
+
 None
 
 #### <b>Known limitations</b>
+
 None
+
 
 #### <b>ThreadX usage hints</b>
 
@@ -48,16 +52,16 @@ None
    This require changes in the linker files to expose this memory location.
     + For EWARM add the following section into the .icf file:
      ```
-   place in RAM_region    { last section FREE_MEM };
-   ```
+     place in RAM_region    { last section FREE_MEM };
+     ```
     + For MDK-ARM:
-  ```
+    ```
     either define the RW_IRAM1 region in the ".sct" file
-    or modify the line below in "tx_low_level_initilize.s to match the memory region being used
+    or modify the line below in "tx_initialize_low_level.S to match the memory region being used
         LDR r1, =|Image$$RW_IRAM1$$ZI$$Limit|
-  ```
+    ```
     + For STM32CubeIDE add the following section into the .ld file:
-  ```
+    ```
     ._threadx_heap :
       {
          . = ALIGN(8);
@@ -65,7 +69,7 @@ None
          . = . + 64K;
          . = ALIGN(8);
        } >RAM_D1 AT> RAM_D1
-  ```
+    ```
 
        The simplest way to provide memory for ThreadX is to define a new section, see ._threadx_heap above.
        In the example above the ThreadX heap size is set to 64KBytes.
@@ -79,15 +83,23 @@ None
 
 RTOS, ThreadX, Threading, Event flags, Preemption threshold
 
+
 ### <b>Hardware and Software environment</b>
 
-  - This application runs on STM32WBxx devices.
-  - This application has been tested with STMicroelectronics P-NUCLEO-WB55 boards Revision MB1355C-01
+  - This example runs on STM32WBxx devices
+  - This example has been tested with STMicroelectronics P-NUCLEO-WB55.Nucleo boards Revision MB1355C-01
     and can be easily tailored to any other supported device and development board.
+
+  - This application uses USART1 to display logs, the hyperterminal configuration is as follows:
+      - BaudRate = 115200 baud
+      - Word Length = 8 Bits
+      - Stop Bit = 1
+      - Parity = None
+      - Flow control = None
 
 ###  <b>How to use it ?</b>
 
-In order to make the program work, you must do the following:
+In order to make the program work, you must do the following :
 
  - Open your preferred toolchain
  - Rebuild all files and load your image into target memory
